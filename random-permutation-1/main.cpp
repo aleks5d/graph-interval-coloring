@@ -38,25 +38,27 @@ int main() {
 	vector<int> perm(n);
 	for (int i = 0; i < n; ++i) perm[i] = i;
 
-	do {
+	const int T = 5;
+
+	while (clock() < CLOCKS_PER_SEC * T) {
+		random_shuffle(perm.begin(), perm.end());
 		currw.assign(n, -1);
-		for (int i : perm) {
-			currw[i] = 0;
-			for (int to : gr[i]) {
-				if (currw[to] != -1) {
-					currw[i] = max(currw[i], currw[to] + w[to]);
-				}
+		for (int i = 0; i < n; ++i) {
+			currw[perm[i]] = 0;
+			for (int to : gr[perm[i]]) {
+				if (currw[to] == -1) continue;
+				currw[perm[i]] = max(currw[perm[i]], currw[to] + w[to]);
 			}
 		}
-		int mx = 0;
-		for (int i = 0; i < n; ++i) {
-			mx = max(mx, currw[i] + w[i]);
-		}
-		if (mx < ans) {
-			ans = mx;
+		int cans = 0;
+		for (int i = 0; i < n; ++i) cans = max(cans, currw[i] + w[i]);
+
+		if (cans < ans) {
+			ans = cans;
 			answer = currw;
 		}
-	} while (next_permutation(all(perm)));
+	}
+
 
 	cout << ans << "\n";
 	for (int i = 0; i < n; ++i) cout << answer[i] << " ";
