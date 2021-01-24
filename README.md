@@ -158,21 +158,21 @@ E(A, A) - ребра из множества E такие, что оба их к
 
 Решение неточное, работает за число фаз * время обработки фазы, а именно O(cnt * n)
 
-t -> t/2
+    t -> t/2
 
-(F Old, F New) -> 
+    (F Old, F New) -> 
 
-    F Old < F New -> exp(-(F Old - F New) / t)
+        F Old < F New -> exp(-(F Old - F New) / t)
 
-    otherwise     -> 1
+        otherwise     -> 1
 
-F(perm) = max time 
+    F(perm) = max time 
 
 ## simulated-annealing-permutation-2
 
 Немного изменим функцию оптимальности предыдущего способа. Будем использовать
 
-F(perm) = sum time
+    F(perm) = sum time
 
 ## simulated-annealing-permutation-3
 
